@@ -1,0 +1,102 @@
+body {
+  font-family: Arial;
+  color: white;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 10;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+
+
+.label {
+  padding-left: 10px;
+}
+
+.input {
+  padding-right: 10px;
+}
+
+div.horizontalgap {
+  float: left;
+  overflow: hidden;
+  height: 1px;
+  width: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cadastrar {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 20px;
+  width: 100%;
+}
+
+.login {
+  background-color: #549cfc;
+  color: white;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 20px;
+  width: 100%;
+}
+
+form {
+  margin-top: 30px;
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.principal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 12px;
+}
