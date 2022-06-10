@@ -22,12 +22,10 @@ export class MessagesComponent implements OnInit {
   add(){
     const token = sessionStorage.getItem('token');
     if (!token || token == "undefined") {
-      console.log('here')
       this.router.navigate(['/home']);
       return;
     }
     this.web.addMessage(this.message, token).subscribe(res => {
-      console.log(res)
       if(res.ok == true){
         this.toastr.success("Mensagem enviada com sucesso!")
         this.loadMessages()
@@ -43,7 +41,6 @@ export class MessagesComponent implements OnInit {
       timeOut: 2000,
     })
     this.router.navigate(['/home']);
-    console.log('here')
   }
 
   async loadMessages(): Promise<void> {
@@ -58,7 +55,6 @@ export class MessagesComponent implements OnInit {
       this.router.navigate(['/home']);
       return;
     }
-    console.log(this.listMessages)
   }
 
   ngOnInit(): void {

@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   add(){
     if (this.verifyErrorOnForm()) return;
     this.web.addUser(this.user).subscribe(res => {
-      console.log(res)
       if(res.ok == true){
         this.toastr.success("Cadastro realizado com sucesso!")
       }else{
@@ -38,7 +37,6 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/home']);
           return;
         }
-        console.log(res)
         this.toastr.success("Login realizado com sucesso!", undefined, {
           timeOut: 2000,
         })
@@ -56,10 +54,8 @@ export class HomeComponent implements OnInit {
     if(expiry){
       const now = new Date().getTime()
       if(expiry>now){
-        console.log('expiry maior')
         this.router.navigate(['/messages']);
       }else{
-        console.log('expiry menor')
         sessionStorage.clear()
       }
     }
