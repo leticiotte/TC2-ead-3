@@ -5,6 +5,7 @@
       <div  class="field flex">
         <label  class="label">Username</label>
         <input
+          [(ngModel)] = "username"
           name="username"
           id="username"
           type="text"
@@ -15,6 +16,7 @@
       <div  class="field flex">
         <label  class="label">Senha</label>
         <input
+          [(ngModel)] = "password"
           name="senha"
           id="senha"
           type="password"
@@ -23,7 +25,7 @@
         />
       </div>
       <div  class="field">
-        <input horizontalgap class="login" name="submit" id="submit" type="submit" value="Login" />
+        <input (click)="login()" horizontalgap class="login" name="submit" id="submit" type="submit" value="Login" />
       </div>
     </form>
   </div>
@@ -36,6 +38,7 @@
       <div  class="field flex">
         <label  class="label">Nome</label>
         <input
+          [(ngModel)] = "user.name"
           name="name"
           id="name"
           type="text"
@@ -46,6 +49,7 @@
       <div  class="field flex">
         <label  class="label">Email/Username</label>
         <input
+          [(ngModel)] = "user.email"
           name="username"
           id="username"
           type="email"
@@ -56,6 +60,7 @@
       <div  class="field flex">
         <label  class="label">Senha</label>
         <input
+          [(ngModel)] = "user.password"
           name="senha"
           id="senha"
           type="password"
@@ -64,7 +69,7 @@
         />
       </div>
       <div  class="field">
-        <input horizontalgap class="cadastrar" name="submit" id="submit" type="submit" value="Cadastrar" />
+        <input (click)="add()" horizontalgap class="cadastrar" name="submit" id="submit" type="submit" value="Cadastrar" />
       </div>
     </form>
   </div>

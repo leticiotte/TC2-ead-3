@@ -2,3 +2,7 @@ header, body{
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
+header{
+  text-align: center;
+  padding: 7px;
+}

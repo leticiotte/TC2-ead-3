@@ -1,15 +1,67 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { DatabaseService } from '../database.service';
+import { Message } from '../models/Message';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css']
+  styleUrls: ['./messages.component.css'],
 })
 export class MessagesComponent implements OnInit {
+  listMessages: Message[] = [];
+  message = ""
 
-  constructor() { }
+  constructor(
+    private web: DatabaseService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+  add(){
+    const token = sessionStorage.getItem('token');
+    if (!token || token == "undefined") {
+      console.log('here')
+      this.router.navigate(['/home']);
+      return;
+    }
+    this.web.addMessage(this.message, token).subscribe(res => {
+      console.log(res)
+      if(res.ok == true){
+        this.toastr.success("Mensagem enviada com sucesso!")
+        this.loadMessages()
+      }else{
+        this.toastr.error("Não foi possível enviar a mensagem.")
+      }
+    });
   }
 
+  logout(){
+    sessionStorage.clear()
+    this.toastr.success("Logout realizado com sucesso!", undefined, {
+      timeOut: 2000,
+    })
+    this.router.navigate(['/home']);
+    console.log('here')
+  }
+
+  async loadMessages(): Promise<void> {
+    const token = sessionStorage.getItem('token');
+    if (!token || token == "undefined") {
+      this.router.navigate(['/home']);
+      return;
+    }
+    this.listMessages = await this.web.getMessages(token);
+    if((this.listMessages as any).status == 'Erro'){
+      sessionStorage.clear()
+      this.router.navigate(['/home']);
+      return;
+    }
+    console.log(this.listMessages)
+  }
+
+  ngOnInit(): void {
+    this.loadMessages()
+  }
 }
