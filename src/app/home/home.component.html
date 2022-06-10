@@ -33,12 +33,13 @@
 
 <div class="split right">
   <div class="principal">
-    <form ngNativeValidate>
+    <form ngNativeValidate [formGroup]="form">
       <h2>Cadastro</h2>
       <div  class="field flex">
         <label  class="label">Nome</label>
         <input
           [(ngModel)] = "user.name"
+          formControlName="name"
           name="name"
           id="name"
           type="text"
@@ -50,6 +51,7 @@
         <label  class="label">Email/Username</label>
         <input
           [(ngModel)] = "user.email"
+          formControlName="email"
           name="username"
           id="username"
           type="email"
@@ -61,6 +63,7 @@
         <label  class="label">Senha</label>
         <input
           [(ngModel)] = "user.password"
+          formControlName="password"
           name="senha"
           id="senha"
           type="password"

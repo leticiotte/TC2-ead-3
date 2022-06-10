@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DatabaseService } from '../database.service';
@@ -10,7 +11,7 @@ import { User } from '../models/User';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  form!: FormGroup;
   user : User = { name: "", email: "", password: "" }
   username = ""
   password = ""
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(private web : DatabaseService, private toastr: ToastrService, private router: Router) { }
 
   add(){
+    if (this.verifyErrorOnForm()) return;
     this.web.addUser(this.user).subscribe(res => {
       console.log(res)
       if(res.ok == true){
@@ -63,8 +65,40 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  verifyErrorOnForm() {
+    if (this.form.get('password')?.errors?.['min']) {
+      this.toastr.error('A senha precisa ter no mínimo 8 caracteres');
+      return true;
+    }
+    if (this.form.get('email')?.errors?.['email']) {
+      this.toastr.error('Insira um e-mail válido');
+      return true;
+    }
+    if (!this.form.valid) {
+      this.toastr.error('Preencha todos os campos');
+      return true;
+    }
+
+    return false;
+  }
+
+  initForm(): void {
+    this.form = new FormGroup({
+      name: new FormControl(this.user.name, [Validators.required]),
+      email: new FormControl(this.user.email, [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl(this.user.password, [
+        Validators.required,
+        Validators.min(8)
+      ]),
+    });
+  }
+
   ngOnInit(): void {
-    this.verifyIfTokenDoesntExpired()
+    this.verifyIfTokenDoesntExpired();
+    this.initForm();
   }
 
 }
